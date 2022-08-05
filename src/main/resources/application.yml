@@ -11,7 +11,12 @@ spring:
     properties:
       hibernate:
 #        show_sql: true
-        format_sql: true
+        format_sql: t음rue
+        default_batch_fetch_size: 100 # 이게 뭐지 켜는게 좋다는데 limit 1000 db마다 in query limit가 걸려있는 경우가 있음
+#    open-in-view: false
+#    transaction이 시작할 때 부터 끝날 때까지만 영속성을 지니고 있음 (transaction이 끝나면 connection을 반환함)
+#    해당 옵션을 끄면 transaction 안에서 필요한 모든 지연로딩을 끝내야한다.
+#    실시간 트래픽이 많은 서비스의 경우 꺼주는게 좋
 
 server:
   port: 8081
