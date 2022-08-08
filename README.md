@@ -1,0 +1,1 @@
+# JPA SHOP example with Jenkins
