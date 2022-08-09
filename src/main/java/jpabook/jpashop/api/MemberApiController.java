@@ -61,6 +61,10 @@ public class MemberApiController {
         return new Result(memberRepository.findByName(name));
     }
 
+    @GetMapping("/api/v2/member/{id}")
+    public void delMemberV2(@RequestParam("id") Long id) {
+        memberRepository.deleteById(id);
+    }
     @Data
     @AllArgsConstructor
     static class Result<T> {
