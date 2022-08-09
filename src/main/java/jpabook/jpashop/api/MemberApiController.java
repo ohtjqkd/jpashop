@@ -1,6 +1,7 @@
 package jpabook.jpashop.api;
 
 import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MemberApiController {
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
     @PostMapping("/api/v1/members")
     public CreateMemberResponse saveMemberV1(@RequestBody @Valid Member member) {
@@ -52,6 +54,11 @@ public class MemberApiController {
                 .map(m -> new MemberDto(m.getName()))
                 .collect(Collectors.toList());
         return new Result(collect);
+    }
+
+    @GetMapping("/api/v2/member/{name}")
+    public Result<MemberDto> memberV2ByName(@RequestParam("name") String name) {
+        return new Result(memberRepository.findByName(name));
     }
 
     @Data
